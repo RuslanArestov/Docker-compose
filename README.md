@@ -40,9 +40,9 @@ Hey, Netology
 
 ## **Решение**
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/1.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/1.png)\
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/2.png)
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/2.png)
 
 # **Задача 3**
 1. Воспользуйтесь docker help или google, чтобы узнать как подключиться к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2".
@@ -62,15 +62,15 @@ Hey, Netology
 
 ## **Решение**
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/3.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/3.png)\
 
 Docker отправляет сигнал SIGINT контейнеру, что приводит к завершению процессов.
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/4.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/4.png)\
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/5.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/5.png)\
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/6.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/6.png)\
 
 Проблема заключается в том, что после изменения порта в конфигурационном файле Nginx, Nginx теперь слушает на порту 81 внутри контейнера, но проброс портов остался на порту 80. Это приводит к тому, что запросы на порт 8080 на хост-системе не достигают Nginx, так как Nginx больше не слушает на порту 80 внутри контейнера.
 
@@ -91,8 +91,8 @@ docker rm -f custom-nginx-t2
 
 ## **Решение**
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/8.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/9.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/8.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/9.png)\
 
 # **Задача 5**
 1. Создайте отдельную директорию(например /tmp/netology/docker/task5) и 2 файла внутри него. "compose.yaml" с содержимым:
@@ -133,13 +133,13 @@ services:
 ## **Решение**
 Запустился compose.yaml. Если существуют оба файла, Compose предпочитает канонический compose.yaml.
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/10.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/11.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/12.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/13.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/14.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/10.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/11.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/12.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/13.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/14.png)\
 
 Первое предупреждение указывает на то, что атрибут version в файле docker-compose.yaml устарел и будет игнорироваться.
 Второе предупреждение указывает на то, что Docker Compose нашел "сиротские" контейнеры, которые больше не описаны в файле docker-compose.yaml.
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/main/images/15.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/15.png)\
