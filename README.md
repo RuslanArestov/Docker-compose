@@ -7,6 +7,7 @@
 + скачайте образ nginx:1.21.1;
 + Создайте Dockerfile и реализуйте в нем замену дефолтной индекс-страницы(/usr/share/nginx/html/index.html), на файл index.html с содержимым:
 
+```
 <html>
 <head>
 Hey, Netology
@@ -15,7 +16,7 @@ Hey, Netology
 <h1>I will be DevOps Engineer!</h1>
 </body>
 </html>
-
+```
 + Соберите и отправьте созданный образ в свой dockerhub-репозитории c tag 1.0.0 (ТОЛЬКО ЕСЛИ ЕСТЬ ДОСТУП).
 + Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
 
@@ -40,7 +41,7 @@ Hey, Netology
 
 ## **Решение**
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/1.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/1.png)
 
 ![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/2.png)
 
@@ -62,19 +63,19 @@ Hey, Netology
 
 ## **Решение**
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/3.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/3.png)
 
 Docker отправляет сигнал SIGINT контейнеру, что приводит к завершению процессов.
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/4.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/4.png)
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/5.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/5.png)
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/6.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/6.png)
 
 Проблема заключается в том, что после изменения порта в конфигурационном файле Nginx, Nginx теперь слушает на порту 81 внутри контейнера, но проброс портов остался на порту 80. Это приводит к тому, что запросы на порт 8080 на хост-системе не достигают Nginx, так как Nginx больше не слушает на порту 80 внутри контейнера.
 
-Команда для принудительного удаления, запущенного контейнера
+Команда для принудительного удаления, запущенного контейнера:\
 docker rm -f custom-nginx-t2
 
 Не приложил скриншот к команде docker rm -f custom-nginx-t2, потому что пропустил случайно это задание, а все контейнеры и образы я уже удалил.
@@ -91,11 +92,13 @@ docker rm -f custom-nginx-t2
 
 ## **Решение**
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/8.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/9.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/8.png)
+
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/9.png)
 
 # **Задача 5**
 1. Создайте отдельную директорию(например /tmp/netology/docker/task5) и 2 файла внутри него. "compose.yaml" с содержимым:
+```
 version: "3"
 services:
   portainer:
@@ -112,20 +115,26 @@ services:
 
     ports:
     - "5000:5000"
+```
 
 И выполните команду "docker compose up -d". Какой из файлов был запущен и почему? (подсказка: https://docs.docker.com/compose/compose-application-model/#the-compose-file )
-2. Отредактируйте файл compose.yaml так, чтобы были запущенны оба файла. (подсказка: https://docs.docker.com/compose/compose-file/14-include/)
-3. Выполните в консоли вашей хостовой ОС необходимые команды чтобы залить образ custom-nginx как custom-nginx:latest в запущенное вами, локальное registry. Дополнительная документация: https://distribution.github.io/distribution/about/deploying/
-4. Откройте страницу "https://127.0.0.1:9000" и произведите начальную настройку portainer.(логин и пароль адмнистратора)
-5. Откройте страницу "http://127.0.0.1:9000/#!/home", выберите ваше local окружение. Перейдите на вкладку "stacks" и в "web editor" задеплойте следующий компоуз:
-version: '3'
 
+2. Отредактируйте файл compose.yaml так, чтобы были запущенны оба файла. (подсказка: https://docs.docker.com/compose/compose-file/14-include/)
+
+3. Выполните в консоли вашей хостовой ОС необходимые команды чтобы залить образ custom-nginx как custom-nginx:latest в запущенное вами, локальное registry. Дополнительная документация: https://distribution.github.io/distribution/about/deploying/
+
+4. Откройте страницу "https://127.0.0.1:9000" и произведите начальную настройку portainer.(логин и пароль адмнистратора)
+
+5. Откройте страницу "http://127.0.0.1:9000/#!/home", выберите ваше local окружение. Перейдите на вкладку "stacks" и в "web editor" задеплойте следующий компоуз:
+
+```
+version: '3'
 services:
   nginx:
     image: 127.0.0.1:5000/custom-nginx
     ports:
       - "9090:80"
-
+```
 Перейдите на страницу "http://127.0.0.1:9000/#!/2/docker/containers", выберите контейнер с nginx и нажмите на кнопку "inspect". В представлении <> Tree разверните поле "Config" и сделайте скриншот от поля "AppArmorProfile" до "Driver".
 Удалите любой из манифестов компоуза(например compose.yaml). Выполните команду "docker compose up -d". Прочитайте warning, объясните суть предупреждения и выполните предложенное действие. Погасите compose-проект ОДНОЙ(обязательно!!) командой.
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
@@ -137,9 +146,9 @@ services:
 ![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/11.png)\
 ![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/12.png)\
 ![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/13.png)\
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/14.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/14.png)
 
 Первое предупреждение указывает на то, что атрибут version в файле docker-compose.yaml устарел и будет игнорироваться.
 Второе предупреждение указывает на то, что Docker Compose нашел "сиротские" контейнеры, которые больше не описаны в файле docker-compose.yaml.
 
-![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/15.png)\
+![alt text](https://github.com/RuslanArestov/Docker-compose/blob/master/images/15.png)
